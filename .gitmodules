@@ -1,0 +1,6 @@
+[submodule "server"]
+	path = server
+	url = https://github.com/nicolaspernoud/ninicobox-v3-server.git
+[submodule "client"]
+	path = client
+	url = https://github.com/nicolaspernoud/ninicobox-v3-client.git

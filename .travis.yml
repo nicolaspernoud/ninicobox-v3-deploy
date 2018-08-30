@@ -1,0 +1,33 @@
+
+dist: trusty
+sudo: required
+
+language: generic
+
+# addons:
+#   sonarcloud:
+#     organization: "nicolaspernoud-github"
+#     token:
+#       secure: "043UgXgLPkMJgjYuup1x8+IBF9ryDKVLL22aOD2I4/J410tCR4u5k6g9cPeV7rdZxRcZyeC1Y7xRkU2qxKjDutBNA09uRtGjAx32tcltu4DlMsErQhDxyvhP7IFUUr7vDQoD3WqWkPPT2LNs2Q1S4mKjdE4t58Pah3duTotsv5NtsAMEWtTTSpra0s0dZ9cRh6E8IfVA46+nMZIJYAXfUibkJehoWVWEiH1VJFZUIZaM/FYgHulzC0aaCdJ9ZbxFx6/xvbN5usqkMRg5R5QLz6i5JO3PUatE0dHOq4xiRDyXuX7i0uIuG7QyhM+FvqejCBzM4GGKgQ1s5MC3EaCLeIiggtWt4RgrACx09Blrwrp3llzK6pTc0xxNzVXSegOVksGit5ECgZ5hL52Hd/9P57Y8oFZyvs85Ka2fN0ZOgv4XwZBzvnlUsbWkeXsBanRGKzn1DCqK2XDX/y3glsdNI+9WSda71PvHWFvHgp+na1B/J16ZIEiXTdsnex3OiI3Djp4cVfeoI4TN6eLa55rcz+su5qHzRP/KHVzxoB+CBIHej6tTbZtnBDSjxud5oaQ9GuaUwV+JABjvx2r8QEuwxXO+S17SuH14ZWtkZQ9ZZrJpNlgdtMzZ8OmeufGP07H55BaYyqH6b6uJPB5pGdSQmGdzQe3KjO3tuTEC6fUOayg="
+# jdk:
+#   - oraclejdk8
+# cache:
+#   directories:
+#     - '$HOME/.sonar/cache'
+
+services:
+  - docker
+
+script:
+  # sonarcloud scan
+  # - npm install typescript
+  # - sonar-scanner
+  # create container and push it to docker hub
+  - set -e
+  - export REPO=nicolaspernoud/ninicobox-v3
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`
+  - echo $REPO:$TAG:$TRAVIS_BUILD_NUMBER
+  - docker build -t $REPO:$TRAVIS_BUILD_NUMBER .
+  - docker tag $REPO:$TRAVIS_BUILD_NUMBER $REPO:$TAG
+  - docker push $REPO
