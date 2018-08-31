@@ -2,18 +2,20 @@
 
 FROM          golang:alpine as server-builder
 
-WORKDIR       /go/src
+WORKDIR       /server
 
 RUN           apk update && apk upgrade && \
-              apk add --no-cache bash git openssh
-ADD           ninicobox-v3-server github.com/nicolaspernoud/ninicobox-v3-server
-RUN           cd github.com/nicolaspernoud/ninicobox-v3-server && go get -d -v && go build
+              apk add --no-cache bash git openssh build-base
+ADD           ninicobox-v3-server .
+RUN           go get -d -v && \
+              go test ./... && \
+              go build
 
 # Building the client
 
 FROM          node:8 as client-builder
 
-WORKDIR       /src
+WORKDIR       /client
 
 ADD           ninicobox-v3-client .
 RUN           npm install npm@latest -g
@@ -29,10 +31,14 @@ WORKDIR       /app
 
 RUN           apk update && apk add ca-certificates libcap
 
-COPY          --from=server-builder /go/src/github.com/nicolaspernoud/ninicobox-v3-server /app
-COPY          --from=client-builder /src/dist /app/client
-COPY          --from=client-builder /src/package.json /app/client
+COPY          --from=server-builder /server/server /app
+COPY          --from=server-builder /server/config /app/config
+COPY          --from=server-builder /server/data /app/data
+COPY          --from=server-builder /server/dev_certificates /app/dev_certificates
+COPY          --from=server-builder /server/ipgeodatabase /app/ipgeodatabase
+COPY          --from=client-builder /client/dist /app/client
+COPY          --from=client-builder /client/package.json /app/client
 
-RUN           setcap cap_net_bind_service=+ep ninicobox-v3-server
+RUN           setcap cap_net_bind_service=+ep server
 
-ENTRYPOINT    [ "./ninicobox-v3-server"]
+ENTRYPOINT    [ "./server"]
