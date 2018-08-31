@@ -23,7 +23,7 @@ script:
   - sonar-scanner
   # create container and push it to docker hub
   - set -e
-  - export REPO=nicolaspernoud/ninicobox-v3-test
+  - export REPO=nicolaspernoud/ninicobox-v3
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`
   - echo $REPO:$TAG:$TRAVIS_BUILD_NUMBER

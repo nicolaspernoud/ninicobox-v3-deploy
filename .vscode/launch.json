@@ -16,6 +16,14 @@
             "env": {},
             "args": ["-debug", "-framesource=https://localhost:4200", "-https_port=2443"],
             "showLog": true
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Debug Client",
+            "url": "http://localhost:4200",
+            "webRoot": "${workspaceFolder}/ninicobox-v3-client",
+            "runtimeExecutable": "/usr/bin/chromium-browser"
         }
     ]
 }
