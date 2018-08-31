@@ -1,0 +1,16 @@
+version: "2.4"
+
+services:
+
+  docker-ninicobox-container:
+    image: nicolaspernoud/ninicobox-v3
+    build: .
+    restart: unless-stopped
+    mem_limit: 512m
+    user: '1000'
+    command: -debug -debug_mode_port=443
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 443:443
+      - 80:80
