@@ -37,6 +37,6 @@ docker-compose up
 ## Screen captures
 
 ![File explorer](./screen-captures/file-explorer.jpg)
-![Proxy services](./screen-captures/proxy-services.jpg)
-![Proxy services add](./screen-captures/proxy-services-add.jpg)
+![App services](./screen-captures/apps.jpg)
+![App services add](./screen-captures/app-add.jpg)
 ![Users management](./screen-captures/users-mgmt.jpg)
