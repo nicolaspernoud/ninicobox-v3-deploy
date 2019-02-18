@@ -7,7 +7,7 @@ WORKDIR       /server
 RUN           apk update && apk upgrade && \
               apk add --no-cache bash git openssh build-base
 ADD           ninicobox-v3-server .
-RUN           go get -d -v && \
+RUN           go get -d ./... && \
               go test ./... && \
               go build
 
