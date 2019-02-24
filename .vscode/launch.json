@@ -14,7 +14,7 @@
             "host": "127.0.0.1",
             "program": "${workspaceFolder}/ninicobox-v3-server/main.go",
             "env": {},
-            "args": ["-debug", "-framesource=https://localhost:4200", "-https_port=2443"],
+            "args": ["-debug", "-framesource=https://box.127.0.0.1.nip.io:4443", "-https_port=2443", "-hostname=box.127.0.0.1.nip.io"],
             "showLog": true
         },
         {
