@@ -19,14 +19,14 @@ git submodule foreach --recursive git checkout master
 ```bash
 # Start the server (or use vs code debug config)
 cd ninicobox-v3-server
-go run main.go -debug -framesource=https://localhost:4200 -https_port=2443
+go run main.go -debug -framesource=https://box.127.0.0.1.nip.io:4443 -https_port=2443 -hostname=box.127.0.0.1.nip.io
 # Start the client in another terminal
 cd ninicobox-v3-client
 npm install
 npm start
 ```
 
-Visit https://localhost:4200 to try the app (login: admin ; password: password)
+Visit https://box.127.0.0.1.nip.io:4443 to try the app (login: admin ; password: password)
 
 ## Run with docker
 
