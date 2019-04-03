@@ -31,7 +31,7 @@ WORKDIR       /app
 
 RUN           apk update && apk add ca-certificates libcap
 
-COPY          --from=server-builder /server/server /app
+COPY          --from=server-builder /server/ninicobox-v3-server /app
 COPY          --from=server-builder /server/configs /app/configs
 COPY          --from=server-builder /server/data /app/data
 COPY          --from=server-builder /server/dev_certificates /app/dev_certificates
@@ -39,6 +39,6 @@ COPY          --from=server-builder /server/ipgeodatabase /app/ipgeodatabase
 COPY          --from=client-builder /client/dist /app/web
 COPY          --from=client-builder /client/package.json /app/web
 
-RUN           setcap cap_net_bind_service=+ep server
+RUN           setcap cap_net_bind_service=+ep ninicobox-v3-server
 
-ENTRYPOINT    [ "./server"]
+ENTRYPOINT    [ "./ninicobox-v3-server"]
