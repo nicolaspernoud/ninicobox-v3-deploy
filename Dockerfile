@@ -13,7 +13,7 @@ RUN           go get -d ./... && \
 
 # Building the client
 
-FROM          node:8 as client-builder
+FROM          node:12 as client-builder
 
 WORKDIR       /client
 
