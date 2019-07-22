@@ -1,6 +1,6 @@
 # Building the server
 
-FROM          golang:latest as server-builder
+FROM          golang:alpine as server-builder
 
 WORKDIR       /server
 
