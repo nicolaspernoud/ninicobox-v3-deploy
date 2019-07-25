@@ -4,8 +4,8 @@ FROM golang as server-builder
 
 WORKDIR /server
 
-RUN apt-get update && \
-    apt-get -y install libcap2-bin
+# RUN apt-get update && \
+# apt-get -y install libcap2-bin
 
 ADD ninicobox-v3-server .
 RUN go get -d ./... && \
@@ -28,7 +28,7 @@ RUN npm install && \
 
 # Putting all together
 
-FROM scratch
+FROM debian:buster-slim
 
 WORKDIR /app
 
@@ -39,5 +39,10 @@ COPY --from=server-builder /server/dev_certificates /app/dev_certificates
 COPY --from=server-builder /server/ipgeodatabase /app/ipgeodatabase
 COPY --from=client-builder /client/dist /app/web
 COPY --from=client-builder /client/package.json /app/web
+
+RUN apt-get update && \
+    apt-get -y install libcap2-bin
+
+RUN setcap cap_net_bind_service=+ep ninicobox-v3-server
 
 ENTRYPOINT [ "./ninicobox-v3-server"]
