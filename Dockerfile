@@ -28,7 +28,7 @@ RUN npm install && \
 
 # Putting all together
 
-FROM scratch
+FROM alpine
 
 WORKDIR /app
 
