@@ -28,7 +28,9 @@ RUN npm install && \
 
 # Putting all together
 
-FROM alpine
+FROM alpine:latest
+
+RUN apk update && apk add ca-certificates
 
 WORKDIR /app
 
