@@ -30,7 +30,8 @@ RUN npm install && \
 
 FROM alpine:latest
 
-RUN apk update && apk add ca-certificates
+RUN apk update && apk add ca-certificates && apk add mailcap
+# ca-certificates for autocert (Let's Encrypt) and mailcap to get mime types for downloaded documents
 
 WORKDIR /app
 

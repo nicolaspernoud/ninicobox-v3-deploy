@@ -8,7 +8,7 @@ services:
     restart: unless-stopped
     mem_limit: 512m
     user: '1000'
-    command: -https_port=2443 -debug
+    command: -https_port=2443 -debug -hostname=box.127.0.0.1.nip.io
     volumes:
       - /etc/localtime:/etc/localtime:ro
     ports:
