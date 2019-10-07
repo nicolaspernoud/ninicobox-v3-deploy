@@ -21,9 +21,9 @@
             "type": "chrome",
             "request": "launch",
             "name": "Debug Client",
-            "url": "http://localhost:4200",
+            "url": "https://box.127.0.0.1.nip.io:4443",
             "webRoot": "${workspaceFolder}/ninicobox-v3-client",
-            "runtimeExecutable": "/usr/bin/chromium-browser"
+            "runtimeExecutable": "/snap/bin/chromium"
         }
     ]
 }
